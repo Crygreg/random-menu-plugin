@@ -1,4 +1,5 @@
 // This file is included separately for each engine version
+#include <RandomMenu.hpp>
 
 namespace GOTHIC_NAMESPACE 
 {
@@ -7,7 +8,7 @@ namespace GOTHIC_NAMESPACE
 
 	void Game_EntryPoint()
 	{
-
+		srand((unsigned int)time(NULL));
 	}
 
 	void Game_Init()
@@ -52,12 +53,14 @@ namespace GOTHIC_NAMESPACE
 
 	void LoadBegin()
 	{
-
+		srand((unsigned int)time(NULL));
 	}
 
 	void LoadEnd()
 	{
-
+		srand((unsigned int)time(NULL));
+//		zsound->StopAllSounds();
+//		zmusic->Stop();
 	}
 
 	void Game_LoadBegin_NewGame()
@@ -120,14 +123,6 @@ namespace GOTHIC_NAMESPACE
 
 	}
 
-	/*int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
-	auto Hook_WinMain = Union::CreateHook(reinterpret_cast<void*>(zSwitch(0x004F3E10, 0x00506810, 0x005000F0, 0x00502D70)), &WinMain, Union::HookType::Hook_Detours);
-	int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
-	{
-		Game_EntryPoint();
-		return Hook_WinMain(hInstance, hPrevInstance, lpCmdLine, nShowCmd);
-	}*/
-
 	/*void __fastcall oCGame_Init(oCGame* self, void* vtable);
 	auto Hook_oCGame_Init = Union::CreateHook(reinterpret_cast<void*>(zSwitch(0x00636F50, 0x0065D480, 0x006646D0, 0x006C1060)), &oCGame_Init, Union::HookType::Hook_Detours);
 	void __fastcall oCGame_Init(oCGame* self, void* vtable)
@@ -177,23 +172,23 @@ namespace GOTHIC_NAMESPACE
 		Game_SaveEnd();
 	}*/
 
-	/*void __fastcall oCGame_LoadGame(oCGame* self, void* vtable, int slot, const zSTRING& levelPath);
+	void __fastcall oCGame_LoadGame(oCGame* self, void* vtable, int slot, const zSTRING& levelPath);
 	auto Hook_oCGame_LoadGame = Union::CreateHook(reinterpret_cast<void*>(zSwitch(0x0063C070, 0x00662B20, 0x00669970, 0x006C65A0)), &oCGame_LoadGame, Union::HookType::Hook_Detours);
 	void __fastcall oCGame_LoadGame(oCGame* self, void* vtable, int slot, const zSTRING& levelPath)
 	{
 		Game_LoadBegin_NewGame();
 		Hook_oCGame_LoadGame(self, vtable, slot, levelPath);
 		Game_LoadEnd_NewGame();
-	}*/
+	}
 
-	/*void __fastcall oCGame_LoadSaveGame(oCGame* self, void* vtable, int slot, zBOOL loadGlobals);
+	void __fastcall oCGame_LoadSaveGame(oCGame* self, void* vtable, int slot, zBOOL loadGlobals);
 	auto Hook_oCGame_LoadSaveGame = Union::CreateHook(reinterpret_cast<void*>(zSwitch(0x0063C2A0, 0x00662D60, 0x00669BA0, 0x006C67D0)), &oCGame_LoadSaveGame, Union::HookType::Hook_Detours);
 	void __fastcall oCGame_LoadSaveGame(oCGame* self, void* vtable, int slot, zBOOL loadGlobals)
 	{
 		Game_LoadBegin_SaveGame();
 		Hook_oCGame_LoadSaveGame(self, vtable, slot, loadGlobals);
 		Game_LoadEnd_SaveGame();
-	}*/
+	}
 
 	/*void __fastcall oCGame_ChangeLevel(oCGame* self, void* vtable, const zSTRING& levelpath, const zSTRING& startpoint);
 	auto Hook_Game_Load_ChangeLevel = Union::CreateHook(reinterpret_cast<void*>(zSwitch(0x0063CD60, 0x00663950, 0x0066A660, 0x006C7290)), &oCGame_ChangeLevel, Union::HookType::Hook_Detours);
